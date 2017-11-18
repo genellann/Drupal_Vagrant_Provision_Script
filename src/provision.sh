@@ -50,4 +50,7 @@ chown --recursive vagrant:www-data /var/www/html/$APP_NAME
 chmod --recursive g+w /var/www/html/$APP_NAME
 service apache2 restart
 
+echo " ------------- INSTALLING GIT ------------- "
+apt-get install -y git
+
 echo " ------------- PROVISION SCRIPT END ------------- "
