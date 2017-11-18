@@ -71,8 +71,7 @@ Install LAMP:
     mv drush.phar /usr/local/bin/drush
 
 ### Download Drupal
-It is recommended that Drupal 8 sites be built using Composer, with Drush listed as a dependency. 
-http://docs.drush.org/en/8.x/install/ https://github.com/drupal-composer/drupal-project
+From [Drush docs](http://docs.drush.org/en/8.x/install/): "It is recommended that Drupal 8 sites be built using Composer, with Drush listed as a dependency." The project they recommend to start with is [drupal-composer/drupal-project](https://github.com/drupal-composer/drupal-project). That is what this script does.
 
     cd /var/www/html
     rm -rf *
@@ -82,7 +81,7 @@ http://docs.drush.org/en/8.x/install/ https://github.com/drupal-composer/drupal-
 ### Install Drupal
 Drush [site-install docs](https://drushcommands.com/drush-8x/core/site-install/)
 
-This script creates the drupal database using the root user. If you want to create a drupal database user, you'll have to create that user before running site-install. That requires a password insert which is why this script uses root. Here's a good [tutorial](https://www.drupal.org/docs/7/install/step-2-create-the-database). There is probably a way to automate the password requirement. I just haven't looked for it, yet.
+This script creates the drupal database using the root user. If you want to create a drupal database user, you'll have to create that user before running site-install. That requires a password insert which is why this script uses root. Here's a good [tutorial](https://www.drupal.org/docs/7/install/step-2-create-the-database) for creating a drupal database user. There is probably a way to automate the password requirement. I just haven't looked for it, yet.
  
     cd $APP_NAME/web
     drush site-install -y standard --account-name=$ACCT_NAME --account-pass=$ACCT_PASS --account-mail=$ACCT_EMAIL --db-url=mysql://$DB_USER:$DB_PASS@$DB_HOST/$DB_NAME --site-name=$APP_NAME
@@ -122,4 +121,4 @@ Git - your git root will be /var/www/html/$APP_NAME/web. The [drupal-composer/dr
 
 [Vagrant commands](https://www.vagrantup.com/docs/cli/) - you will mostly use vagrant up (start the box), vagrant ssh (ssh into the box), and vagrant halt (stop the box).
 
-If the something doesn't go right and you need to modify the scripts and start over: (1) _vagrant destroy_, (2) _rm -rf .vagrant Vagrantfile_, (3) make your script changes, (4) then run _./start.sh_ again.
+If something doesn't go right and you need to modify the scripts and start over: (1) _vagrant destroy_, (2) _rm -rf .vagrant Vagrantfile_, (3) make your script changes, (4) then run _./start.sh_ again.
