@@ -1,26 +1,23 @@
 # Drupal_Vagrant_Provision_Script
 Provisioning script for spinning up a vagrant box with a fresh instance of Drupal 8 on it.
 
-What is vagrant
+Vagrant allows you to create portable work environments which can be easily reproduced on any system. 
+
 What is provisioning
 What is Drupal
+https://drupalize.me/videos/why-vagrant?p=1526 
 
-1. [Download VagrantBox](https://www.virtualbox.org/wiki/Downloads)
-2. Clone or dl repo
-3. Run the [start](/src/start.sh) script. 
-Make sure the script has execution permissions: chmod a+x start.sh
-In unix shell, run ./start.sh
-
-Overview of what my scripts do: 
-initializes bento/ubuntu-16.04,
-configures Vagrantfile, 
-runs vagrant up which will run provision.sh the first time, 
-Ubuntu 16.04 
+1. [Download VirtualBox](https://www.virtualbox.org/wiki/Downloads)
+2. [Download Vagrant](https://www.vagrantup.com/downloads.html)
+3. Clone or download this git repository: _git clone git@github.com:genradley/Drupal_Vagrant_Provision_Script.git_
+4. Make sure the [start](/src/start.sh) and [provision](/src/provision.sh) scripts have execution permissions: _chmod a+x_
+5. In unix shell, run the [start](/src/start.sh) script: _./start.sh_
 
 ## [start.sh](/src/start.sh)
 
-Vagrantfile docs
-Vagrant commands
+The start script: 
+(1) initializes a ubuntu 16.04 VirtualBox, and 
+(2) tells the [Vagrantfile](https://www.vagrantup.com/docs/vagrantfile/) to use the provisioning script and what port or ip to run  on
 
 Check to see if a Vagrantfile exists:
 
@@ -122,3 +119,5 @@ Restart Apache so all changes are applied:
 May be virtual box change
 Installing modules/themes
 Git
+Vagrant commands - ssh
+If the something doesn't go right and you need to modify the scripts and start over: vagrant destroy, rm -rf .vagrant Vagrantfile then run ./start.sh again
