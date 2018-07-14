@@ -1,9 +1,11 @@
 #!/usr/bin/env bash
 
 APP_NAME=mysite
+ROOT_DB_USER=root
+ROOT_DB_PASS=rootp@ss
 DB_HOST=localhost
 DB_NAME=mysite_db
-DB_USER=root
+DB_USER=drupal
 DB_PASS=p@ssc0d3
 ACCT_NAME=admin
 ACCT_PASS=admin
@@ -40,7 +42,10 @@ composer create-project drupal-composer/drupal-project:8.x-dev $APP_NAME --stabi
 
 echo " ------------- INSTALLING DRUPAL ------------- "
 cd $APP_NAME/web
-drush site-install -y standard --account-name=$ACCT_NAME --account-pass=$ACCT_PASS --account-mail=$ACCT_EMAIL --db-url=mysql://$DB_USER:$DB_PASS@$DB_HOST/$DB_NAME --site-name=$APP_NAME
+mysql -u $ROOT_DB_USER -p $ROOT_DB_PASS -e "CREATE USER $DB_USER@$DB_HOST IDENTIFIED BY $DB_PASS;"
+mysql -u $ROOT_DB_USER -p $ROOT_DB_PASS -e "CREATE DATABASE $DB_NAME CHARACTER SET utf8 COLLATE utf8_general_ci;"
+mysql -u $ROOT_DB_USER -p $ROOT_DB_PASS -e "GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, DROP, INDEX, ALTER, CREATE TEMPORARY TABLES ON $DB_NAME.* TO $DB_USER@$DB_HOST;"
+sudo drush site-install -y standard --account-name=$ACCT_NAME --account-pass=$ACCT_PASS --account-mail=$ACCT_EMAIL --db-url=mysql://$DB_USER:$DB_PASS@$DB_HOST/$DB_NAME --site-name=$APP_NAME
 
 echo " ------------- CONFIGURING SERVER ------------- "
 a2enmod rewrite
